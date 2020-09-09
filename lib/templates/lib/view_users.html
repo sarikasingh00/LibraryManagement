@@ -1,0 +1,6 @@
+{% for member in member %}
+	<h1>{{member.member_name}}</h1>
+	<h1>{{member.member_department}}</h1>
+	<a href="{% url 'delete-users' member.id %}" role="button"><button class="btn btn-primary">Delete Users</button></a>
+	<a href="{% url 'update-users' member.id %}" role="button"><button class="btn btn-primary">Update Users</button></a>
+{% endfor %}

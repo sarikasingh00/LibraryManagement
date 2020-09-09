@@ -1,0 +1,6 @@
+{% for books in books %}
+	<h1>{{books.author_name}}</h1>
+	<h1>{{books.book_title}}</h1>
+	<a href="{% url 'delete-books' books.id %}" role="button"><button class="btn btn-primary">Delete Books</button></a>
+	<a href="{% url 'update-books' books.id %}" role="button"><button class="btn btn-primary">Update Books</button></a>
+{% endfor %}
