@@ -17,12 +17,12 @@ class Librarian(models.Model):
 
 class Member(models.Model):
 	# hi yug
-	user = models.OneToOneField(User, on_delete = models.CASCADE)
+	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	is_type = models.CharField(max_length=50,choices=is_type,default='Students')
 	# member_id = models.CharField(primary_key='True',max_length=55)
 	member_name = models.CharField(max_length=100)
 	member_department = models.CharField(max_length=50)
-	member_number = models.CharField()
+	# member_number = models.CharField()
 
 	def __str__(self):
 		return self.member_name

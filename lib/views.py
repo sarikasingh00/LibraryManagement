@@ -52,8 +52,9 @@ def update_books(request,par1):
 
 def add_users(request):
 	form = AddUsers(request.POST)
-	if(form.is_valid()):
-		user = User(username = form['username'], password = form['password'])
+	# if(form.is_valid()):
+		# user = User(username = form['username'], password = form['password'])
+		
 	return render(request,"lib/add_users.html",{'form':form})
 
 def view_users(request):
