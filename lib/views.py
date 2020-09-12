@@ -21,7 +21,7 @@ def manage_users(request):
 
 def add_books(request):
 	if(request.method=='POST'):
-		form = AddBooks(request.POST)
+		form = AddBooks(request.POST, request.FILES)
 		if(form.is_valid()):
 			form.save()
 			return redirect('manage-books')
