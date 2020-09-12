@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from lib import views as lib_views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', lib_views.welcome,name='library-welcome'),
@@ -34,4 +36,4 @@ urlpatterns = [
     path('view-users/',lib_views.view_users,name='view-users'),
     path('delete-users/<str:par1>/',lib_views.delete_users,name='delete-users'),
     path('update-users/<str:par1>/',lib_views.update_users,name='update-users'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

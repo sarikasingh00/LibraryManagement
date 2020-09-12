@@ -21,7 +21,7 @@ def manage_users(request):
 
 def add_books(request):
 	if(request.method=='POST'):
-		form = AddBooks(request.POST)
+		form = AddBooks(request.POST, request.FILES)
 		if(form.is_valid()):
 			form.save()
 			return redirect('manage-books')
@@ -51,9 +51,6 @@ def update_books(request,par1):
 	return render(request,"lib/update_books.html",{'update_form':update_form})
 
 def add_users(request):
-	form = AddUsers(request.POST)
-	if(form.is_valid()):
-		user = User(username = form['username'], password = form['password'])
 	return render(request,"lib/add_users.html",{'form':form})
 
 def view_users(request):
