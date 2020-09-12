@@ -10,7 +10,14 @@ class AddBooks(forms.ModelForm):
 		model = Books
 		fields = ['book_image','book_title','author_name','book_description','book_subject','book_quantity']
 
-class AddUsers(forms.ModelForm):
-	class Meta():
+
+class UserForm(UserCreationForm):
+	class Meta:
+		model = User
+		fields = ['username','first_name', 'password1', 'password2']
+
+
+class MemberForm(forms.ModelForm):
+	class Meta:
 		model = Member
-		fields = ['member_name','member_department','is_type']
+		fields = ['is_type','uid', 'department']

@@ -1,6 +1,8 @@
-{% for member in member %}
-	<h1>{{member.member_name}}</h1>
-	<h1>{{member.member_department}}</h1>
-	<a href="{% url 'delete-users' member.id %}" role="button"><button class="btn btn-primary">Delete Users</button></a>
-	<a href="{% url 'update-users' member.id %}" role="button"><button class="btn btn-primary">Update Users</button></a>
+{% load static %}
+
+{% for member in members %}
+	<h1>{{member.user.first_name}}</h1>
+	<h1>{{member.department}}</h1>
+	<a href="{% url 'delete-users' member.uid %}" role="button"><button class="btn btn-primary">Delete User</button></a>
+	<a href="{% url 'update-users' member.uid %}" role="button"><button class="btn btn-primary">Update User</button></a>
 {% endfor %}
