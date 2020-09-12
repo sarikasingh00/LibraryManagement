@@ -61,7 +61,7 @@ def add_users(request):
 			member.user = user
 			member.save()
 			messages.success(request, f'Registration complete! You may log in!')
-			return redirect('login')
+			return redirect('manage-users')
 	else:
 		user_form = UserForm(request.POST)
 		member_form = MemberForm(request.POST)
