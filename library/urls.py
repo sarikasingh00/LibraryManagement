@@ -36,5 +36,5 @@ urlpatterns = [
     path('view-users/',lib_views.view_users,name='view-users'),
     path('delete-users/<int:id>/',lib_views.delete_users,name='delete-users'),
     path('update-users/<int:id>/',lib_views.update_users,name='update-users'),
-    path('unauthorized/',lib_views.unauthorized_access, name='unauthorized-access'),
+    path('unauthorized',lib_views.unauthorized_access, name='unauthorized-access'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
