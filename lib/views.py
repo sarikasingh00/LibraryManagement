@@ -111,7 +111,7 @@ def update_users(request,id):
 	else:
 		user_update_form = UserForm(instance = members.user)
 		member_update_form =  MemberForm(instance=members)
-	return render(request,"lib/update_books.html",{'user_update_form':user_update_form,"member_update_form" : member_update_form})
+	return render(request,"lib/update_users.html",{'user_update_form':user_update_form,"member_update_form" : member_update_form})
 	# return redirect('view-books')
 
 
