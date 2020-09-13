@@ -121,18 +121,25 @@
 }
 </style>
   {% if books %}
-    <div class="card-deck">
+    <div class="card-deck" style="height: 430px;margin-left: 40px">
       	{% for books in books %}
       	<div class="flip-card">
           	<div class="flip-card-inner">
             <div class="flip-card-front">
           	<img class = "image rounded-sm article-img" src="{{ books.book_image.url }}" style="width:100%;height:60%;">
             <div class="card-body text-center">
-            <h4><u>{{ books.book_title }}</u></a></h4>
+            <h2><u>{{ books.book_title }}</u></h2>
           	<p class="article-content text-danger kbd"><kbd>{{ books.author_name }}</kbd></p>
-          	<a href="{% url 'delete-books' books.id %}" role="button"><button class="btn btn-primary">Delete Book</button></a>
-	  		<a href="{% url 'update-books' books.id %}" role="button"><button class="btn btn-primary" >Update Book</button></a>
             </div>
+        	</div>
+        	<div class="flip-card-back">
+        		<h2 class="article-content text-dark text-center"><u>{{ books.book_title }}</u></h2>
+        		<br><br>
+        		<h5 class="article-content text-dark text-left" style="margin-left: 10px">Subject: {{ books.book_subject }}</h5>
+          		<h5 class="article-content text-dark text-left" style="margin-left: 10px">Description: {{ books.book_description }}</h5>
+          		<h5 class="article-content text-dark text-left" style="margin-left: 10px">Availability: {{ books.book_quantity }}</h5>
+          		<a href="{% url 'delete-books' books.id %}" role="button"><button class="btn btn-danger" style="margin-top: 190px ">Delete Book</button></a>
+	  			<a href="{% url 'update-books' books.id %}" role="button"><button class="btn btn-primary" style="margin-top: 190px ">Update Book</button></a>
         	</div>
         	</div>
   		</div>
