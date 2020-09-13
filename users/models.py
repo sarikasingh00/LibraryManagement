@@ -16,7 +16,7 @@ class Librarian(models.Model):
 	user = models.OneToOneField(User , on_delete = models.CASCADE)
 	# librarian_id = models.CharField(primary_key='True',max_length=60)
 	librarian_name = models.CharField(max_length=100)
-	librarian_dob = models.DateField(default=timezone.now().strftime('%Y-%m-%d'))
+	dob = models.DateField(default=timezone.now().strftime('%Y-%m-%d'))
 
 	def __str__(self):
 		return self.librarian_name

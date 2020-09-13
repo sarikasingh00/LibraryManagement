@@ -4,22 +4,34 @@ from lib.models import Books
 from lib.forms import AddBooks, MemberForm, UserForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
+from library.settings import UNAUTHORIZED_URL
 # Create your views here.
+
+def librarian_check(user):
+	return user.is_superuser
+
 def welcome(request):
 	return render(request,"lib/welcome.html")
 
 def home(request):
 	if Librarian.objects.filter(user=request.user).first():
+		print("lib")
 		return render(request,"lib/librarian_home.html")
-	if Member.objects.filter(user=request.user).first():
+	# if Member.objects.filter(user=request.user).first():
+	else:
+		print("mem")
 		return render(request,"lib/member_home.html")
 
+@user_passes_test(librarian_check)
 def manage_books(request):
 	return render(request,"lib/manage_books.html")
 
+@user_passes_test(librarian_check)
 def manage_users(request):
 	return render(request,"lib/manage_users.html")
 
+@user_passes_test(librarian_check)
 def add_books(request):
 	if(request.method=='POST'):
 		form = AddBooks(request.POST, request.FILES)
@@ -34,12 +46,13 @@ def view_books(request):
 	books = Books.objects.all()
 	return render(request,"lib/view_books.html",{'books':books})
 
+@user_passes_test(librarian_check)
 def delete_books(request,par1):
 	books = Books.objects.filter(id=par1).first()
 	books.delete()
 	return redirect('view-books')
 
-
+@user_passes_test(librarian_check)
 def update_books(request,par1):
 	books = Books.objects.get(id=par1)
 	if (request.method == 'POST'):
@@ -51,6 +64,7 @@ def update_books(request,par1):
 		update_form = AddBooks(instance=books)
 	return render(request,"lib/update_books.html",{'update_form':update_form})
 
+@user_passes_test(librarian_check, login_url='unauthorized-access')
 def add_users(request):
 	if request.method == 'POST':
 		user_form = UserForm(request.POST)
@@ -73,11 +87,14 @@ def view_users(request):
 	members = Member.objects.all()
 	return render(request,"lib/view_users.html",{'members':members})
 
+@user_passes_test(librarian_check)
 def delete_users(request,id):
 	member = Member.objects.filter(uid=id).first()
+	member.user.delete()
 	member.delete()
 	return redirect('view-users')
 
+@user_passes_test(librarian_check)
 def update_users(request,id):
 	members = Member.objects.get(uid=id)
 	if (request.method == 'POST'):
@@ -96,3 +113,7 @@ def update_users(request,id):
 		member_update_form =  MemberForm(instance=members)
 	return render(request,"lib/update_books.html",{'user_update_form':user_update_form,"member_update_form" : member_update_form})
 	# return redirect('view-books')
+
+
+def unauthorized_access(request):
+	return render(request,"lib/unauthorized_access.html")
