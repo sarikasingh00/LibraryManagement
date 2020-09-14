@@ -40,8 +40,8 @@
 <style type="text/css">
 .flip-card {
   background-color: transparent;
-  width: 400px;
-  height: 500px;
+  width: 320px;
+  height: 370px;
   perspective: 1000px;
   display: inline-block;
   padding: 8px;
@@ -64,7 +64,7 @@
 .flip-card-front, .flip-card-back {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 370px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -121,14 +121,14 @@
 }
 </style>
   {% if books %}
-    <div class="card-deck" style="height: 430px;margin-left: 40px">
+    <div class="card-deck" style="height: 100%;margin-left: 40px">
       	{% for books in books %}
       	<div class="flip-card">
           	<div class="flip-card-inner">
             <div class="flip-card-front">
           	<img class = "image rounded-sm article-img" src="{{ books.book_image.url }}" style="width:100%;height:60%;">
             <div class="card-body text-center">
-            <h2><u>{{ books.book_title }}</u></h2>
+            <h4>{{ books.book_title }}</h4>
           	<p class="article-content text-danger kbd"><kbd>{{ books.author_name }}</kbd></p>
             </div>
         	</div>
@@ -137,14 +137,14 @@
         		<br><br>
         		<h5 class="article-content text-dark text-left" style="margin-left: 10px">Subject: {{ books.book_subject }}</h5>
           		<h5 class="article-content text-dark text-left" style="margin-left: 10px">Description: {{ books.book_description }}</h5>
-          		<h5 class="article-content text-dark text-left" style="margin-left: 10px">Availability: {{ books.book_quantity }}</h5>
-          		<a href="{% url 'delete-books' books.id %}" role="button"><button class="btn btn-danger" style="margin-top: 190px ">Delete Book</button></a>
-	  			<a href="{% url 'update-books' books.id %}" role="button"><button class="btn btn-primary" style="margin-top: 190px ">Update Book</button></a>
+          		<h5 class="article-content text-dark text-left" style="margin-left: 10px; padding-bottom: 25px;">Availability: {{ books.book_quantity }}</h5>
+          		<a href="{% url 'delete-books' books.id %}" role="button"><button class="btn btn-danger" style="margin-bottom: 20px;">Delete Book</button></a>
+	  			<a href="{% url 'update-books' books.id %}" role="button"><button class="btn btn-primary" style="margin-bottom: 20px;">Update Book</button></a>
         	</div>
         	</div>
   		</div>
-     {% if forloop.counter|divisibleby:"3"  %}
-     </div><br><div class="card-deck">
+     {% if forloop.counter|divisibleby:"4"  %}
+     </div><br><div class="card-deck"style="height: 100%;margin-left: 40px">
      {% endif %}
       {% endfor %}
   </div>
