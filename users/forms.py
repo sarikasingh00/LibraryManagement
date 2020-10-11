@@ -5,23 +5,6 @@ from users.models import Member
 from django.contrib.auth.forms import UserCreationForm
 
 
-class AddBooks(forms.ModelForm):
-	class Meta:
-		model = Books
-		fields = ['book_image','book_title','author_name','book_description','book_subject','book_quantity']
-
-
-
-
-
-
-
-
-
-
-
-
-
 class UserForm(UserCreationForm):
 	class Meta:
 		model = User

@@ -14,11 +14,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from lib import views as lib_views
+from users import views as user_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+
+# urlpatterns = [
+#     path('', lib_views.welcome,name='library-welcome'),
+#     path('admin/', admin.site.urls),
+#     path('login/', auth_views.LoginView.as_view(template_name = 'users/login.html'),name = 'login'),
+#     path('logout/', auth_views.LogoutView.as_view(template_name = 'users/logout.html'),name = 'logout'),
+#     path('home/',lib_views.home,name='home'),
+#     path('manage-books/',lib_views.manage_books,name='manage-books'),
+#     path('manage-users/',user_views.manage_users,name='manage-users'),
+#     path('add-books/',lib_views.add_books,name='add-books'),
+#     path('view-books/',lib_views.view_books,name='view-books'),
+#     path('delete-books/<str:par1>/',lib_views.delete_books,name='delete-books'),
+#     path('update-books/<str:par1>/',lib_views.update_books,name='update-books'),
+#     path('add-users/',user_views.add_users,name='add-users'),
+#     path('view-users/',user_views.view_users,name='view-users'),
+#     path('delete-users/<int:id>/',user_views.delete_users,name='delete-users'),
+#     path('update-users/<int:id>/',user_views.update_users,name='update-users'),
+#     path('unauthorized',lib_views.unauthorized_access, name='unauthorized-access'),
+# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = [
     path('', lib_views.welcome,name='library-welcome'),
@@ -26,15 +46,15 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name = 'users/login.html'),name = 'login'),
     path('logout/', auth_views.LogoutView.as_view(template_name = 'users/logout.html'),name = 'logout'),
     path('home/',lib_views.home,name='home'),
-    path('manage-books/',lib_views.manage_books,name='manage-books'),
-    path('manage-users/',lib_views.manage_users,name='manage-users'),
-    path('add-books/',lib_views.add_books,name='add-books'),
-    path('view-books/',lib_views.view_books,name='view-books'),
-    path('delete-books/<str:par1>/',lib_views.delete_books,name='delete-books'),
-    path('update-books/<str:par1>/',lib_views.update_books,name='update-books'),
-    path('add-users/',lib_views.add_users,name='add-users'),
-    path('view-users/',lib_views.view_users,name='view-users'),
-    path('delete-users/<int:id>/',lib_views.delete_users,name='delete-users'),
-    path('update-users/<int:id>/',lib_views.update_users,name='update-users'),
+    path('books/',include('lib.urls')),
+    path('users/',include('users.urls')),
+    # path('add-books/',lib_views.add_books,name='add-books'),
+    # path('view-books/',lib_views.view_books,name='view-books'),
+    # path('delete-books/<str:par1>/',lib_views.delete_books,name='delete-books'),
+    # path('update-books/<str:par1>/',lib_views.update_books,name='update-books'),
+    # path('add-users/',user_views.add_users,name='add-users'),
+    # path('view-users/',user_views.view_users,name='view-users'),
+    # path('delete-users/<int:id>/',user_views.delete_users,name='delete-users'),
+    # path('update-users/<int:id>/',user_views.update_users,name='update-users'),
     path('unauthorized',lib_views.unauthorized_access, name='unauthorized-access'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
