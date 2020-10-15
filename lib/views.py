@@ -20,8 +20,9 @@ def home(request):
 		return render(request,"lib/librarian_home.html")
 	# if Member.objects.filter(user=request.user).first():
 	else:
+		books = Books.objects.all()
 		print("mem")
-		return render(request,"lib/member_home.html")
+		return render(request,"lib/member_home.html", {'books':books})
 
 @user_passes_test(librarian_check, login_url='unauthorized-access')
 def manage_books(request):

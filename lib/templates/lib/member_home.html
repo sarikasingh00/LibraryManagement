@@ -1,1 +1,154 @@
-<h1>Member</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home-Librarian</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style>
+    html, body {
+      overflow-x: hidden;
+      /* background-image: url("https://i.pinimg.com/originals/67/18/22/671822c2f63dd5f65d8fd15c9710420b.jpg");   */
+      background-image: url("https://image.freepik.com/free-photo/blur-background-from-books-shelf_74648-241.jpg");
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <p class="text-light"><h3 style="color: white;">Sardar Patel Institute of Technology</h3></p>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto"> 
+      <li class="nav-item">
+        <a class="text-ligt nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-ligt nav-link" href="#" style="color: white;">{{user.username}}</a>
+      </li>
+    </ul>
+  </nav>
+<br>
+
+<style type="text/css">
+.flip-card {
+  background-color: transparent;
+  width: 320px;
+  height: 370px;
+  perspective: 1000px;
+  display: inline-block;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 370px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #fff;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #fff;
+  color: white;
+  transform: rotateY(180deg);
+}
+.card-flip > div {
+    backface-visibility: hidden;
+    transition: transform 300ms;
+    transition-timing-function: linear;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    display: flex;
+  }
+
+  .card-front {
+    transform: rotateY(0deg);
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+    position: absolute;
+    top: 0;
+  }
+
+  .card-flip:hover .card-front {
+    transform: rotateY(-180deg);
+  }
+    
+  .card-flip:hover .card-back {
+    transform: rotateY(0deg);
+  }
+  .column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+  {% if books %}
+    <div class="card-deck" style="height: 100%;margin-left: 40px">
+        {% for books in books %}
+        <div class="flip-card">
+            <div class="flip-card-inner">
+            <div class="flip-card-front">
+            <img class = "image rounded-sm article-img" src="{{ books.book_image.url }}" style="width:100%;height:60%;">
+            <div class="card-body text-center">
+            <h4>{{ books.book_title }}</h4>
+            <p class="article-content text-danger kbd"><kbd>{{ books.author_name }}</kbd></p>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <h2 class="article-content text-dark text-center"><u>{{ books.book_title }}</u></h2>
+            <br><br>
+            <h5 class="article-content text-dark text-left" style="margin-left: 10px">Subject: {{ books.book_subject }}</h5>
+              <h5 class="article-content text-dark text-left" style="margin-left: 10px">Description: {{ books.book_description }}</h5>
+              <h5 class="article-content text-dark text-left" style="margin-left: 10px; padding-bottom: 25px;">Availability: {{ books.book_quantity }}</h5>
+              <a href="#" role="button"><button class="btn btn-secondary" style="margin-bottom: 20px;">Issue Book</button></a>
+          </div>
+          </div>
+      </div>
+     {% if forloop.counter|divisibleby:"4"  %}
+     </div><br><div class="card-deck"style="height: 100%;margin-left: 40px">
+     {% endif %}
+      {% endfor %}
+  </div>
+  {% else %}
+    <h3>No Books available</h3>
+  {% endif %}
+
