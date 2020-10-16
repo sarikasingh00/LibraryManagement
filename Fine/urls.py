@@ -8,6 +8,6 @@ from django.conf.urls.static import static
 from . import views as fine_views
 
 urlpatterns = [
-    path('view/<int:id>/', fine_views.check_fines,name='view-fines'),
+    path('view/', fine_views.check_fines,name='view-fines'),
     path('pay/<int:id>/', fine_views.pay_fine,name='pay-fine'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
