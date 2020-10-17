@@ -121,6 +121,15 @@
   clear: both;
 }
 </style>
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{message}}
+        </div>
+        {% endfor %}
+    </ul>
+  {% endif %}
   {% if books %}
     <div class="card-deck" style="height: 100%;margin-left: 40px">
         {% for books in books %}
@@ -139,7 +148,7 @@
             <h5 class="article-content text-dark text-left" style="margin-left: 10px">Subject: {{ books.book_subject }}</h5>
               <h5 class="article-content text-dark text-left" style="margin-left: 10px">Description: {{ books.book_description }}</h5>
               <h5 class="article-content text-dark text-left" style="margin-left: 10px; padding-bottom: 25px;">Availability: {{ books.book_quantity }}</h5>
-              <a href="#" role="button"><button class="btn btn-secondary" style="margin-bottom: 20px;">Issue Book</button></a>
+              <a href="{% url 'issue-book' books.id %}" role="button"><button class="btn btn-secondary" style="margin-bottom: 20px;">Issue Book</button></a>
           </div>
           </div>
       </div>
