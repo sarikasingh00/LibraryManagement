@@ -22,7 +22,7 @@ class Librarian(models.Model):
 		return self.librarian_name
 
 class Member(models.Model):
-	# hi yug
+
 	user = models.ForeignKey(User, on_delete = models.CASCADE)
 	uid = models.IntegerField(primary_key=True,null=False,default=000000000)
 	is_type = models.CharField(max_length=50,choices=is_type,default='Students')

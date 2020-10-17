@@ -5,6 +5,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    # path('issue/<int:id>/', transaction_views.issue_books,name='issue-books'),
-    # path('return/<int:id>/', transaction_views.return_books,name='return-books'),
+    path('issue/<int:id>/', transaction_views.issue_book,name='issue-book'),
+    path('return/<int:id>/', transaction_views.return_book,name='return-book'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
