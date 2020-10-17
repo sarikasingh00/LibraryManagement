@@ -7,3 +7,5 @@ class Fine(models.Model):
     transaction = models.OneToOneField(Transaction, on_delete=models.CASCADE)
     amount = models.FloatField(null=False,default=0)
     date_paid = models.DateField(blank=True,null= True)
+
+# uid, book name, amount

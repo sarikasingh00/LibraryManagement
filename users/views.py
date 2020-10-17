@@ -31,13 +31,13 @@ def add_users(request):
 	else:
 		user_form = UserForm(request.POST)
 		member_form = MemberForm(request.POST)
-	return render(request, 'lib/add_users.html', {'user_form': user_form, 'member_form': member_form})
+	return render(request, 'users/add_users.html', {'user_form': user_form, 'member_form': member_form})
 		
 	# return render(request,"lib/add_users.html",{'form':form})
 
 def view_users(request):
 	members = Member.objects.all()
-	return render(request,"lib/view_users.html",{'members':members})
+	return render(request,"users/view_users.html",{'members':members})
 
 @user_passes_test(librarian_check, login_url='unauthorized-access')
 def delete_users(request,id):
@@ -64,4 +64,4 @@ def update_users(request,id):
 	else:
 		user_update_form = UserForm(instance = members.user)
 		member_update_form =  MemberForm(instance=members)
-	return render(request,"lib/update_users.html",{'user_update_form':user_update_form,"member_update_form" : member_update_form})
+	return render(request,"users/update_users.html",{'user_update_form':user_update_form,"member_update_form" : member_update_form})
