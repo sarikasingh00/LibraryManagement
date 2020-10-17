@@ -15,7 +15,7 @@
 
 	<div class="container-fluid my-auto">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">MY LIBRARY </a>
+        <a class="navbar-brand" href="#" style="font-size: 28px;">Sardar Patel Institute of Technology</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
 	        		<a class="nav-item nav-link" href = "#">Welcome {{user.username}}</a>
 	        		<a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
 				{% else %}
-	          		<a class="nav-item nav-link" href = "{% url 'login' %}">Login</a>
+	          		<a class="nav-item nav-link" href = "{% url 'login' %}" style="font-size: 20px;">Login</a>
 	          	{% endif %}
 	        </div>
 	      </div>
