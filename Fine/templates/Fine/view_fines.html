@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head> view fines</head>    
+    <body>
+        {%if fines%}
+        hi
+            {% for fine in fines %}
+                {{fine.transaction.member}}
+                {{fine.amount}}
+                {{fine.date_paid}}
+            {% endfor %}
+        {% endif %}
+
+    </body>
+</html>
