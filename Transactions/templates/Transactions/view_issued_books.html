@@ -1,0 +1,15 @@
+<html>
+    <head></head>
+    <body>
+        {%if transactions%}
+            {% for transaction in transactions%}
+                {{transaction.id}}
+                {{transaction.book}}
+                {{transaction.book.id}}
+                {{transaction.member}}
+                {{transaction.issue_date}}
+                {{transaction.return_date}}
+            {%endfor%}
+        {%endif%}
+    </body>
+</html>

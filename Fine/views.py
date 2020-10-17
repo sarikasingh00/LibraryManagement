@@ -13,28 +13,32 @@ from lib.views import librarian_check
 def check_fines(request):
     user = request.user
     if user.is_superuser:
-        fines = Fine.objects.all()
+        fines = Fine.objects.all() 
+        print(fines)
     else:
+        print(user)
         member = Member.objects.get(user = user)
-        transactions_of_member = Transaction.objects.all(member =member)
-        fines = Fine.objects.all(transaction = transactions_of_member)
+        transactions_of_member = Transaction.objects.filter(member =member).all()
+        fines = Fine.objects.filter(transaction__in = transactions_of_member).all()
+        # print("jud", fines)
     return render(request, 'Fine/view_fines.html',{'fines' : fines})
+    # page where all/users fines
 
 #  function will be called from Transactions.views.return_book()
 def calculate_fines(transaction):
-    if  transaction.retrun_date - transaction.issue_date > 7:
-        amount = (transaction.retrun_date -transaction.issue_date)*5
-        fine = Fine(transaction, amount)
-        fine.save()
+    print("1",transaction.return_date - transaction.issue_date)
+    # if  transaction.return_date - transaction.issue_date >= timezone.timedelta(0):
+    amount = (transaction.return_date -transaction.issue_date).days*5
+    print(amount, transaction)
+        # fine = Fine(transaction, amount)
+        # print("2", fine.transaction, fine.amount)
+        # fine.save()
 
 # only librarian access
 @user_passes_test(librarian_check, login_url='unauthorized-access')
 def pay_fine(request, id):
     fine = Fine.objects.get(id = id)
-    fine.date_paid = timezone.now()
+    fine.date_paid = timezone.localdate()
     fine.save()
     return render(request, 'Fine/fine_paid.html')
-    # member = Member.objects.all(uid = id)
-    # transactions_of_member = Transaction.objects.all(member =member)
-    # fines = Fine.objects.all(transaction = transactions_of_member)
-    
+    # page for entering uid to mark fine as paid

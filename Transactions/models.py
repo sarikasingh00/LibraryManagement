@@ -8,5 +8,5 @@ class Transaction(models.Model):
 	# user = models.ForeignKey(User, on_delete = models.CASCADE)
 	member = models.ForeignKey(Member, on_delete= models.CASCADE, null=False)
 	book = models.ForeignKey(Books, on_delete = models.CASCADE)
-	issue_date = models.DateField(default=timezone.now)
+	issue_date = models.DateField(default=timezone.localdate)
 	return_date = models.DateField(blank=True, null=True)
