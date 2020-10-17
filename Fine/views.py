@@ -19,6 +19,7 @@ def check_fines(request):
         transactions_of_member = Transaction.objects.all(member =member)
         fines = Fine.objects.all(transaction = transactions_of_member)
     return render(request, 'Fine/view_fines.html',{'fines' : fines})
+    # page where all/users fines
 
 #  function will be called from Transactions.views.return_book()
 def calculate_fines(transaction):
@@ -34,7 +35,4 @@ def pay_fine(request, id):
     fine.date_paid = timezone.now()
     fine.save()
     return render(request, 'Fine/fine_paid.html')
-    # member = Member.objects.all(uid = id)
-    # transactions_of_member = Transaction.objects.all(member =member)
-    # fines = Fine.objects.all(transaction = transactions_of_member)
-    
+    # page for entering uid to mark fine as paid

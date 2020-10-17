@@ -4,7 +4,10 @@ from lib.models import Books
 from users.models import Member
 from Fine.models import Fine
 from Transactions.models import Transaction
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def issue_book(request,id):
     book = Books.objects.filter(id=id).first()
     fine = 0
