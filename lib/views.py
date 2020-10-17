@@ -28,6 +28,9 @@ def home(request):
 def manage_books(request):
 	return render(request,"lib/manage_books.html")
 
+# def manage_fines(request):
+# 	return render(request,"Fine/templates/Fine/manage_fines.html")
+
 # @user_passes_test(librarian_check, login_url='unauthorized-access')
 # def manage_users(request):
 # 	return render(request,"lib/manage_users.html")
