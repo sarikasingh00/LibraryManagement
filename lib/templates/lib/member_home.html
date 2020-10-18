@@ -28,10 +28,10 @@
     </ul>
     <ul class="navbar-nav ml-auto"> 
       <li class="nav-item">
-        <a class="text-ligt nav-link" href="#" style="font-size: 20px;margin-left: -50%;">Issued Books</a>
+        <a class="text-ligt nav-link" href="{% url 'view-issued-books' %}" style="font-size: 20px;margin-left: -50%;">Issued Books</a>
       </li>
       <li class="nav-item">
-        <a class="text-ligt nav-link" href="#" style="font-size: 20px;margin-left: -60%;">Fines</a>
+        <a class="text-ligt nav-link" href="{% url 'view-fines' %}" style="font-size: 20px;margin-left: -60%;">Fines</a>
       </li>
       <li class="nav-item">
         <a class="text-ligt nav-link" href="{% url 'logout' %} " style="font-size: 20px;margin-left: -30%;">Logout</a>
@@ -83,6 +83,7 @@
   {% endif %} -->
   {% if books %}
   {% for book in books %}
+  {% if forloop.counter|divisibleby:"2" %}
   <div class="card mb-3" style="max-width: 940px;left: 20%;height: 250px;width: 800px;">
     <div class="row no-gutters">
       <div class="col-md-4">
@@ -99,6 +100,7 @@
       </div>
     </div>
   </div>
+  {% else %}
   <div class="card mb-3" style="max-width: 940px;left: 20%;height: 250px;width: 800px;background-color: lightgrey;">
     <div class="row no-gutters">
       <div class="col-md-8">
@@ -115,6 +117,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
   {% endfor %}
   {% endif %}
 

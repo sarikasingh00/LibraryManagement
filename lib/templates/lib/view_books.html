@@ -66,6 +66,8 @@
   </div> -->
   {% if books %}
   {% for book in books %}
+
+  {% if forloop.counter|divisibleby:"2" %}
   <div class="card mb-3" style="max-width: 940px;left: 20%;height: 250px;width: 800px;">
     <div class="row no-gutters">
       <div class="col-md-4">
@@ -83,6 +85,7 @@
       </div>
     </div>
   </div>
+  {% else %}
   <div class="card mb-3" style="max-width: 940px;left: 20%;height: 250px;width: 800px;background-color: lightgrey;">
     <div class="row no-gutters">
       <div class="col-md-8">
@@ -100,5 +103,6 @@
       </div>
     </div>
   </div>
+  {% endif %}
   {% endfor %}
   {% endif %}
