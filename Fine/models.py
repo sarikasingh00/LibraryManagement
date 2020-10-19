@@ -8,4 +8,3 @@ class Fine(models.Model):
     amount = models.FloatField(null=False,default=0)
     date_paid = models.DateField(blank=True,null= True)
 
-# uid, book name, amount

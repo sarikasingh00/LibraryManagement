@@ -1,20 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-    <head> view fines</head>    
-    <body>
-        {%if fines%}
-        hi
-            {% for fine in fines %}
-                {{fine.transaction.member}}
-                {{fine.amount}}
-                {{fine.date_paid}}
-            {% endfor %}
-        {% endif %}
-
-    </body>
-</html>
-{% load static %} -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,9 +11,11 @@
   <style>
       html, body {
         overflow-x: hidden;
-        /* background-image: url("https://i.pinimg.com/originals/67/18/22/671822c2f63dd5f65d8fd15c9710420b.jpg");   */
         background-image: url("https://img.freepik.com/free-photo/abstract-techno-background-with-connecting-lines_1048-5570.jpg?size=626&ext=jpg");
         background-size: cover;
+      }
+      .nav-item a:hover{
+        border-bottom: 3px solid rgb(49, 17, 192);
       }
   </style>
 </head>
@@ -45,15 +30,26 @@
     </ul>
     <ul class="navbar-nav ml-auto"> 
       <li class="nav-item">
-        <a class="text-ligt nav-link" href="{% url 'logout' %}" style="font-size: 20px;margin-left: -50%;">Logout</a>
+        <a class="text-ligt nav-link" href="{% url 'home' %}" style="font-size: 20px;padding-right: 20px">Home</a>
+      </li>
+      {% if not librarian%} 
+      <li class="nav-item">
+        <a class="text-ligt nav-link" href="{% url 'view-issued-books' %}" style="font-size: 20px;padding-right: 20px;">Issued Books</a>
       </li>
       <li class="nav-item">
-        <a class="text-ligt nav-link" href="#" style="color: white;font-size: 20px;margin-left: -30%;">{{user.username}}</a>
+        <a class="text-ligt nav-link" href="{% url 'view-fines' %}" style="font-size: 20px;padding-right: 20px;">Fines</a>
+      </li>
+      {%endif%}
+      <li class="nav-item">
+        <a class="text-ligt nav-link" href="{% url 'logout' %} " style="font-size: 20px;padding-right: 20px;">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="text-ligt nav-link" href="#" style="color: white;font-size: 20px;padding-right: 5px;">{{user.username}}</a>
       </li>
     </ul>
   </nav>
 <br>
-<p>To pay fines, please visit the reception</p>
+<p style="color: white;text-align: center;font-size: 20px;">To pay fines, please visit the reception</p>
 <div class="container">    
   <table class="table table-dark table-hover shadow-lg">
     <thead>
@@ -83,7 +79,7 @@
     	  <td class="text-center">{{fine.date_paid}}</td>
         {% if librarian and fine.date_paid is None%}
         <td class="text-center">
-    	  	<a href="{%url 'pay-fine' fine.id%}" role="button"><button class="btn btn-danger">Pay Fine</button></a>
+    	  	<a href="{%url 'pay-fine' fine.id%}" role="button"><button class="btn btn-primary">Pay Fine</button></a>
       </td>
       {%endif%}
         </tr>
