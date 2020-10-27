@@ -36,22 +36,21 @@ def issue_book(request,id):
     	book.save()
     	transaction = Transaction(member = member, book= book)
     	transaction.save()
-
     else:
-    	messages.warning(request, f'Please visit the reception to pay fines. Your total fines is {fine}')
+    	messages.warning(request, f'Please visit the reception to pay fines. Your total fine is {fine}')
 
 
     return redirect('home')
 
 def return_book(request,id):
-    # id = transaction id
 	member = Member.objects.get(user = request.user)
 	transaction = Transaction.objects.get(id=id)
-	print("0",transaction)
+	# print("0",transaction)
 	transaction.return_date = timezone.localdate()
 	transaction.book.book_quantity += 1
 	transaction.book.save()
 	transaction.save()
+	# print(transaction.return_date)
 	calculate_fines(transaction)
 	messages.success(request, 'Book returned successfully')
 	return redirect('home')
