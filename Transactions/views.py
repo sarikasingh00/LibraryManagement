@@ -37,9 +37,10 @@ def issue_book(request,id):
     	transaction = Transaction(member = member, book= book)
     	transaction.save()
     else:
-    	messages.warning(request, f'Please visit the reception to pay fines. Your total fine is {fine}')
-
-
+        if book.book_quantity == 0:
+            messages.warning(request, f'Sorry! This book is currently unavailable.')
+        elif fine > 0:
+            messages.warning(request, f'Please visit the reception to pay your fine. Your total fine is {fine}')
     return redirect('home')
 
 def return_book(request,id):
