@@ -24,12 +24,12 @@ def check_fines(request):
 
 #  function will be called from Transactions.views.return_book()
 def calculate_fines(transaction):
-    print("1",(transaction.return_date - transaction.issue_date).days)
+    # print("1",(transaction.return_date - transaction.issue_date).days)
     if  transaction.return_date - transaction.issue_date >= timezone.timedelta(7):
         amount = (transaction.return_date -transaction.issue_date).days * 5
-        print(amount, transaction)
+        # print(amount, transaction)
         fine = Fine.objects.create(amount=amount, transaction=transaction)
-        print("2", fine.transaction, fine.amount)
+        # print("2", fine.transaction, fine.amount)
         fine.save()
 
 # only librarian access
