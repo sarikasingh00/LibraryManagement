@@ -36,6 +36,7 @@ def issue_book(request,id):
 		book.save()
 		transaction = Transaction(member = member, book= book)
 		transaction.save()
+		messages.success(request, 'Book issued successfully')
 	else:
 		if book.book_quantity == 0:
 			messages.warning(request, f'Sorry! This book is currently unavailable.')
@@ -52,8 +53,11 @@ def return_book(request,id):
 	transaction.book.save()
 	transaction.save()
 	# print(transaction.return_date)
-	calculate_fines(transaction)
-	messages.success(request, 'Book returned successfully')
+	fine = calculate_fines(transaction)
+	if fine:
+		messages.warning(request, 'Book returned successfully. You have an unpaid fine')
+	else:
+		messages.success(request, 'Book returned successfully!')
 	return redirect('home')
 
 

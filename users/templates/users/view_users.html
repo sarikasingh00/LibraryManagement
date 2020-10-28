@@ -38,6 +38,15 @@
     </ul>
   </nav>
 <br>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{message}}
+        </div>
+        {% endfor %}
+    </ul>
+  {% endif %}
 <div class="container">    
   <table class="table table-dark table-hover shadow-lg">
     <thead>
