@@ -62,6 +62,7 @@ def view_books(request):
 def delete_books(request,id):
 	books = Books.objects.filter(id=id).first()
 	books.delete()
+	messages.success(request, 'Book deleted successfully!')
 	return redirect('view-books')
 
 @user_passes_test(librarian_check, login_url='unauthorized-access')

@@ -47,6 +47,7 @@ def delete_users(request,id):
 	member = Member.objects.filter(uid=id).first()
 	member.user.delete()
 	member.delete()
+	messages.success(request, 'User deleted!')
 	return redirect('view-users')
 
 @user_passes_test(librarian_check, login_url='unauthorized-access')
